@@ -40,7 +40,7 @@ st.markdown(
 """,
     unsafe_allow_html=True,
 )
-tabs = ['Statut Incident','Prediction Nombre Incident']
+tabs = ['Statut Incident','Prediction Nombre Incident', 'Performance des modèles']
 page = st.sidebar.selectbox("Selectionnez  une page", tabs)
 add_bg_from_local("abstract-room-sun-card-blank.jpg") 
 
@@ -204,6 +204,35 @@ if page == "Prediction Nombre Incident":
             #         st.success('Prediction generated sucessfully')
             #         st.write(f"Nombre Incident: ")
             #         st.dataframe(predictions)
+
+if page == "Performance des modèles":
+    df_performance_dict_1 = {
+        "Accuracy" : 0.85,
+        "Precision": 0.73,
+        "Rappel": 0.75,
+        "F1-score": 0.74
+    }
+    df_performance_1 = pd.DataFrame(df_performance_dict_1)
+    st.title("""Performance des différents modèles 🧙🏻""")
+    st.subheader('1. Performance du modèle du statut incident sur les départs 🏋️')
+    st.markdown("""Etant donné qu'il s'agit d'un problème de classification, c'est à dire d'incident ou pas sur un depart bien donné, les métriques qui ont été utilisés pour mesurer la performance du modèle sont : """)
+    st.markdown("""**NB : Accuracy, Precision, Rappel, F1-score** """)
+    st.markdown("""##**Les performances sont** """ )
+    st.table(df_performance_1)
+
+
+    df_performance_dict_2 = {
+        "Direction" : ["DRAN", "DRAS", "DRABO", "DRYOP"],
+        "MAE" : [5.94, 4.79, 2.36, 3.87],
+        "RMSE": [9.48, 8.47, 3.37, 6.42],
+        "Moyenne des observations": [8, 5, 3, 5]
+    }
+    df_performance_1 = pd.DataFrame(df_performance_dict_2)
+    st.subheader('2. Performance du modèle du nombre incident par  direction 🏋️')
+    st.markdown("""Etant donné qu'il s'agit d'un problème de regression, c'est à dire du nombre d'incident pour une direction bien donnée, les métriques qui ont été utilisés pour mesurer la performance du modèle sont : """)
+    st.markdown("""**NB : Erreur Moyenne Absolue(MAE), Erreur moyennne quadratique(RMSE)** """)
+    st.markdown("""##**Les performances sont** """ )
+    st.table(df_performance_dict_2)
 
 	
 
