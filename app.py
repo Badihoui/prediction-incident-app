@@ -180,7 +180,7 @@ if page == "Prediction Nombre Incident":
                     
                     st.success('Prediction generated sucessfully')
                     st.write(f"Nombre Incident: ")
-                    st.table(predictions)
+                    st.dataframe(predictions)
             except:
                     st.warning("No model found.. ")
             # with st.spinner("Predictions..."):
